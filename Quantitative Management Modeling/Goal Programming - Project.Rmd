@@ -1,0 +1,127 @@
+---
+title: "gkudeshi_09"
+author: "Gaurav Kudeshia"
+date: "2023-11-26"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Assignment Overview : **
+
+This assignment focuses on exploring goal programming formulations and solutions to improve your understanding of crucial module outcomes. Throughout this task, you will develop expertise in formulating and modeling multi-objective models and categorizing goals based on their type and significance. The practical application involves a decision-making scenario within Emax Corporation's Research and Development Division. Management prioritizes maximizing total profit, maintaining workforce stability, and achieving a moderate increase in annual earnings. Importantly, the assignment emphasizes excluding any substantial earnings increase from the optimization process, reflecting management's strategic considerations for shareholder satisfaction and long-term sustainability.
+
+# Problem 
+
+The Research and Development Division of the Emax Corporation has developed three new
+products. A decision now needs to be made on which mix of these products should be produced.
+Management wants primary consideration given to three factors: total profit, stability in the
+workforce, and achieving an increase in the company’s earnings next year from the $75 million
+achieved this year. In particular, using the units given in the following table, they want to
+
+Maximize Z = P - 6C - 3D, 
+
+P = total (discounted) profit over the life of the new products,
+C = change (in either direction) in the current level of employment,
+D = decrease (if any) in next year’s earnings from the current year’s level.
+
+The amount of any increase in earnings does not enter into Z, because management is concerned
+primarily with just achieving some increase to keep the stockholders happy. (It has mixed
+feelings about a large increase that then would be difficult to surpass in subsequent years.)
+
+1. Define y1+ and y1-, respectively, as the amount over (if any) and the amount under (if any)
+   the employment level goal. Define y2+ and y2- in the same way for the goal regarding
+   earnings next year. Define x1, x2, and x3 as the production rates of Products 1, 2, and 3,
+   respectively. With these definitions, use the goal programming technique to express y1+,
+   y1- , y2+ and y2- algebraically in terms of x1, x2, and x3. Also express P in terms of x1, x2,
+   and x3.
+
+2. Express management’s objective function in terms of x1, x2, x3, y1+, y1- , y2+ and y2-.
+
+3. Formulate and solve the linear programming model. What are your findings?
+
+***
+
+# Conclusion
+
+**1. Employment Penalty Representation:**
+
+   - Variables: y1+ (over the goal) and y1- (under the goal) express penalties for the change in            current employment levels.
+   
+   - Significance: Reflects the deviation from the employment goal of 5000 employees.
+
+**2. Earnings Penalty Representation:**
+
+   - Variables: y2+ (over the goal) and y2- (under the goal) signify penalties for the change in next       year’s earnings.
+   
+   - Context: Captures the adjustment needed for achieving the desired earnings increase.
+
+**3. Linear Programming Models:**
+
+   - Formulation: Models are created using y1a, y1b, y2a, y2b in terms of y1+, y1-, y2+, y2-                respectively.
+   
+   - Purpose: Sets the foundation for optimizing the decision-making process.
+
+**4. Production Rate Decision:**
+
+   - Variables: x1, x2, x3 represent the production rates for products 1, 2, and 3.
+   
+   - Optimization: To achieve maximum profit, 15 units of Product 3 are recommended.
+
+**5. Employment Stabilization Challenge:**
+
+   - Objective: To stabilize employment at 5000, but y1a (exceeding by 2500 employees) incurs a             penalty.
+     
+   - Trade-off: Balancing profit maximization with workforce stability.
+
+**6. Earnings Stability:**
+
+   - Variables: y2a and y2b capture changes in next year’s earnings (in this case, "0").
+   
+   - Outcome: Indicates a stable earnings forecast for the following year.
+
+**7. Objective Function Value:**
+
+   - Profit Maximization: The objective function value of $225 million represents the sought-after          profit.
+   
+   - Conclusion: Illustrates the financial goal the corporation aims to achieve in this specific            scenario.
+
+***
+
+# Summary
+
+•	Started by installing the "lpSolveAPI" library, is used to activate linear programming problem         solving, providing functions for model formulation and optimization.
+
+•	In this decision-making scenario for Emax Corporation's new products, the objective is to maximize     the expression Z = P - 6C - 3D, where P represents total discounted profit, C denotes the change in    employment, and D signifies the decrease in next year's earnings. 
+
+•	The management, prioritizing profit, workforce stability, and a modest earnings increase, formulates   goals and employs goal programming. The linear programming model is expressed in an ".lp" file,        defining the objective function and constraints. 
+
+•	Upon solving, the optimal solution indicates a maximum objective value of 225, with production rates   for the three products and specific values for employment and earnings adjustments. This analysis      aligns with management's goals and aids in decision-making for product production.
+
+***
+
+**Loaded datasets from the necessary libraries**
+```{r}
+library(lpSolveAPI)
+```
+
+
+**The following R code reads an optimization problem from a file named "gkudeshi.lp" and stores it in an object named "x"**
+```{r}
+x <- read.lp("gkudeshi_09.lp")
+x                         
+```
+**The following R code performs optimization using the "solve" function on the variable 'x', retrieves the objective value, variable values, and constraints from the optimization result**
+```{r}
+solve(x)
+get.objective(x)
+get.variables(x)
+get.constraints(x)
+```
+
+
+
